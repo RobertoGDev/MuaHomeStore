@@ -5,9 +5,26 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.card {
+  max-width: 200px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.card img{
+  width: 100%;
+  max-height: 100px;
+  box-sizing: border-box;
+}
+
+.card h3{
+  font-size: .7em;
 }
