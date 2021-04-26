@@ -16,13 +16,21 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import RatingProduct from './RatingProduct';
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    width: 230,
+    margin: 5,
+    marginBottom: 20,
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+    height: 200,
+    width: 200,
+    backgroundSize: 'contain',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -39,16 +47,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Products({all}) {
+export default function Products({id, image_link, product_type, name, description, price, rating}) {
+
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
+  const [expandedId, setExpandedId] = useState(false);
 
   const handleExpandClick = (id) => {
-    setExpanded(!expanded);
+    setExpandedId(expandedId === id ? false : id);
   };
 
   return (
-    all.map(({id, image_link, product_type, name, description, price, rating}) => 
         <Card key={id} className={classes.root}>
             <CardHeader
                 avatar={
@@ -61,7 +69,7 @@ export default function Products({all}) {
                     <MoreVertIcon />
                 </IconButton>
                 }
-                title="Imagen del producto"
+                title={product_type}
             />
             <CardMedia
                 className={classes.media}
@@ -73,10 +81,11 @@ export default function Products({all}) {
                 {name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="small">
-                {product_type}
+                {price}€
                 </Typography>
+                <RatingProduct value={rating} />
             </CardContent>
-            <CardActions disableSpacing>
+            <CardActions className={classes.actions} disableSpacing>
                 <IconButton aria-label="add to favorites">
                 <FavoriteIcon />
                 </IconButton>
@@ -85,21 +94,19 @@ export default function Products({all}) {
                 </IconButton>
                 <IconButton
                 className={clsx(classes.expand, {
-                    [classes.expandOpen]: expanded,
+                    [classes.expandOpen]: expandedId === id,
                 })}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
+                onClick={() => handleExpandClick(id)}
+                aria-expanded={expandedId === id}
                 aria-label="show more"
                 >
                 <ExpandMoreIcon />
                 </IconButton>
             </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Collapse in={expandedId === id} timeout="auto" unmountOnExit>
                 <CardContent>
                 <Typography paragraph>{description}</Typography>
                 </CardContent>
             </Collapse>
         </Card>
-    )
-  )
-}
+    )}

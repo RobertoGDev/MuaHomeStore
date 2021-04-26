@@ -1,8 +1,0 @@
-.catalogue {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 20px;
-    box-sizing: border-box;
-  }
