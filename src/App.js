@@ -2,7 +2,6 @@ import React from 'react';
 import Catalogue from './components/Catalogue';
 import './styles/App.css';
 
-
 export default function App() {
 
   return (

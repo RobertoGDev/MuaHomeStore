@@ -3,6 +3,7 @@ export default async function fetchProducts({brand}) {
     return fetch(url)
     .then((res)=> res.json())
     .then(response => {
+
         const products = response.map(product => {
 
             const {
