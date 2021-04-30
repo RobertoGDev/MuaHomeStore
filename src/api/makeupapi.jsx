@@ -1,5 +1,5 @@
 export default async function fetchProducts({brand}) {
-    const url = `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${brand}`;
+    const url = `https://makeup-api.herokuapp.com/api/v1/products.json?brand=${brand}`;
     return fetch(url)
     .then((res)=> res.json())
     .then(response => {

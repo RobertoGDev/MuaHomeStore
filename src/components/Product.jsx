@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import InfoIcon from '@material-ui/icons/Info';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+import ProductDetail from './ProductDetail';
 
 import RatingProduct from './RatingProduct';
 
@@ -33,14 +33,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'contain',
   },
   expand: {
-    transform: 'rotate(0deg)',
     marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
   },
   avatar: {
     backgroundColor: red[500],
@@ -50,10 +43,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Products({id, image_link, product_type, name, description, price, rating}) {
 
   const classes = useStyles();
-  const [expandedId, setExpandedId] = useState(false);
+  const [openId, setOpenId] = React.useState(false);
 
-  const handleExpandClick = (id) => {
-    setExpandedId(expandedId === id ? false : id);
+  const handleOpenCloseModal = (id) => {
+    setOpenId(openId === id ? false : id);
   };
 
   return (
@@ -92,21 +85,21 @@ export default function Products({id, image_link, product_type, name, descriptio
                 <IconButton aria-label="share">
                 <ShareIcon />
                 </IconButton>
-                <IconButton
-                className={clsx(classes.expand, {
-                    [classes.expandOpen]: expandedId === id,
-                })}
-                onClick={() => handleExpandClick(id)}
-                aria-expanded={expandedId === id}
-                aria-label="show more"
+                <IconButton 
+                  className={classes.expand}
+                  aria-label="More info"
+                  onClick={() => handleOpenCloseModal(id)}
                 >
-                <ExpandMoreIcon />
+                <InfoIcon />
                 </IconButton>
             </CardActions>
-            <Collapse in={expandedId === id} timeout="auto" unmountOnExit>
-                <CardContent>
-                <Typography paragraph>{description}</Typography>
-                </CardContent>
-            </Collapse>
+            <ProductDetail
+              status={openId === id}
+              image_link={image_link}
+              product_type={product_type}
+              nameProduct={name}
+              description={description}
+              handleOpenCloseModal = {handleOpenCloseModal}
+            ></ProductDetail>
         </Card>
     )}
