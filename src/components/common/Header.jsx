@@ -11,21 +11,22 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
   appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: 36,
   },
   hide: {
     display: 'none',
@@ -49,7 +50,9 @@ export default function Header({handleOpenSidebar, openSidebar}) {
               aria-label="open drawer"
               onClick={handleOpenSidebar}
               edge="start"
-              className={clsx(classes.menuButton, openSidebar && classes.hide)}
+              className={clsx(classes.menuButton, {
+                [classes.hide]: openSidebar,
+              })}
             >
               <MenuIcon />
             </IconButton>

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import fetchProducts from "../../api/makeupapi";
-import Product from "./Product";
+import fetchProducts from "../api/makeupapi";
+import Product from "./products/Product";
 
 
-export default function Get({openSidebar, drawerWidth, brand}) {
+export default function Catalogue({openSidebar, drawerWidth, brand}) {
 
     const useStyles = makeStyles((theme) => ({
         root: {

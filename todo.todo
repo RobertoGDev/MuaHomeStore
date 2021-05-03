@@ -1,12 +1,19 @@
 Que Necesita front:
 
     ✔ Api @done (27/6/2020 12:45:12)
-    ☐ Buscador
+    ✔ Buscador @done (3/5/2021 20:18:39)
     ☐ Items en grid
     ☐ Detalle de los items
     ☐ Perfil personal
     ☐ Wishlist
-
+    ☐ Estructura
+        ☐ Home - muestra resumen
+        ☐ Whistlist - Muestra tus productos elegidos
+            ☐ Buscador
+            ☐ Añadir nuevo
+        ☐ Market - muestra el Catálogo con un buscador
+            ☐ Buscador
+            ☐ Productos
 Backend:
     ☐ Base de datos mongo
     ☐ 
