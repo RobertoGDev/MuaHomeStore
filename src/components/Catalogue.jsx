@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import clsx from 'clsx';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import fetchProducts from "../api/makeupapi";
 import Product from "./products/Product";
 
 
-export default function Catalogue({openSidebar, drawerWidth, brand}) {
+export default function Catalogue({brand}) {
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -18,28 +17,16 @@ export default function Catalogue({openSidebar, drawerWidth, brand}) {
               marginLeft: theme.spacing(2),
             },
           },
-        content: {
-          flexGrow: 1,
-          padding: theme.spacing(3),
-          transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-          }),
-          marginLeft: -drawerWidth,
-        },
-        contentShift: {
-          transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-          marginLeft: 0,
-        },
+
         catalogue: {
             width: "100%",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, 230px)",
             justifyContent: "space-between",
-            gridGap: 20
+            gridGap: 20,
+            padding: theme.spacing(9, 1),
+            // necessary for content to be below app bar
+            ...theme.mixins.toolbar,
         },
     }));
 
@@ -53,31 +40,29 @@ export default function Catalogue({openSidebar, drawerWidth, brand}) {
     }, [brand])
 
     return (
-            <main className={clsx(classes.content, {
-                [classes.contentShift]: openSidebar,
-              })}>
-                <div className={classes.catalogue}>
-                {
-                    (products.length !== 0) ? (
-                        products.map( ({id, image_link, product_type, name, description, price, rating, product_colors, product_link}) =>
-                            <Product
-                                key={id}
-                                id={id} 
-                                image_link={image_link} 
-                                product_type={product_type} 
-                                name={name} 
-                                description={description} 
-                                price={price} 
-                                rating={rating}
-                                product_colors={product_colors}
-                                product_link={product_link}
-                            />
-                        )
-                    ) :
-                        <CircularProgress />
-                }   
-                </div>
-            </main>
+
+        <div className={classes.catalogue}>
+        {
+            (products.length !== 0) ? (
+                products.map( ({id, image_link, product_type, name, description, price, rating, product_colors, product_link}) =>
+                    <Product
+                        key={id}
+                        id={id} 
+                        image_link={image_link} 
+                        product_type={product_type} 
+                        name={name} 
+                        description={description} 
+                        price={price} 
+                        rating={rating}
+                        product_colors={product_colors}
+                        product_link={product_link}
+                    />
+                )
+            ) :
+                <CircularProgress />
+        }   
+        </div>
+
         )
     }
 

@@ -15,6 +15,9 @@ import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
 import StoreIcon from '@material-ui/icons/Store';
 import ListItemText from '@material-ui/core/ListItemText';
 
+import {
+  NavLink
+} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -72,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HeadSidebar({ handleChangeBrand, handleOpenSidebar, handleCloseSidebar, openSidebar }) {
+export default function HeadSidebar({ handleOpenSidebar, handleCloseSidebar, openSidebar }) {
   
   const classes = useStyles();
   const theme = useTheme();
@@ -100,18 +103,20 @@ export default function HeadSidebar({ handleChangeBrand, handleOpenSidebar, hand
         </div>
         <Divider />
         <List>
-          <ListItem button>
-            <ListItemIcon><HomeIcon /></ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon><LibraryAddCheckIcon /></ListItemIcon>
-            <ListItemText primary="Whishlist" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon><StoreIcon /></ListItemIcon>
-            <ListItemText primary="Market" />
-          </ListItem>
+            <ListItem button component={NavLink} to="/home" activeClassName="Mui-selected">
+                <ListItemIcon><HomeIcon /></ListItemIcon>
+                <ListItemText primary="Home" />
+            </ListItem>
+        
+            <ListItem button component={NavLink} to="/wishlist" activeClassName="Mui-selected">
+              <ListItemIcon><LibraryAddCheckIcon /></ListItemIcon>
+              <ListItemText primary="Wishlist" />
+            </ListItem>
+
+            <ListItem button component={NavLink} to="/market" activeClassName="Mui-selected">
+              <ListItemIcon><StoreIcon /></ListItemIcon>
+              <ListItemText primary="Market" />
+            </ListItem>
         </List>
       </Drawer>
     </React.Fragment>
