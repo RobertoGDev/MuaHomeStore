@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import fetchProducts from "../../api/makeupapi";
 import Product from "./Product";
 
 
-export default function Get({openSidebar, drawerWidth, brand = "all" } = {}) {
-    
-    console.log(openSidebar);
+export default function Get({openSidebar, drawerWidth, brand}) {
 
     const useStyles = makeStyles((theme) => ({
         root: {
             display: 'flex',
         },
+        circularLoader: {
+            display: 'flex',
+            '& > * + *': {
+              marginLeft: theme.spacing(2),
+            },
+          },
         content: {
           flexGrow: 1,
           padding: theme.spacing(3),
@@ -47,13 +52,13 @@ export default function Get({openSidebar, drawerWidth, brand = "all" } = {}) {
         .then(products => setProducts(products))
     }, [brand])
 
-    
     return (
             <main className={clsx(classes.content, {
                 [classes.contentShift]: openSidebar,
               })}>
                 <div className={classes.catalogue}>
-                    {
+                {
+                    (products.length !== 0) ? (
                         products.map( ({id, image_link, product_type, name, description, price, rating, product_colors, product_link}) =>
                             <Product
                                 key={id}
@@ -68,7 +73,9 @@ export default function Get({openSidebar, drawerWidth, brand = "all" } = {}) {
                                 product_link={product_link}
                             />
                         )
-                    }
+                    ) :
+                        <CircularProgress />
+                }   
                 </div>
             </main>
         )

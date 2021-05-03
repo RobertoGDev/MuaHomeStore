@@ -9,8 +9,10 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import TextField from '@material-ui/core/TextField';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import SearchIcon from '@material-ui/icons/Search';
 import MailIcon from '@material-ui/icons/Mail';
 
 const drawerWidth = 240;
@@ -53,7 +55,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function HeadSidebar({handleOpenSidebar, handleCloseSidebar, openSidebar}) {
+export default function HeadSidebar({ handleChangeBrand, handleOpenSidebar, handleCloseSidebar, openSidebar }) {
+  
   const classes = useStyles();
   const theme = useTheme();
 
@@ -76,7 +79,13 @@ export default function HeadSidebar({handleOpenSidebar, handleCloseSidebar, open
         </div>
         <Divider />
         <List>
-          {['Whislist', 'Marcas', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem>
+            <ListItemIcon><SearchIcon /></ListItemIcon>
+            <form className={classes.root} noValidate autoComplete="off">
+              <TextField id="standard-basic" label="Search" onChange={handleChangeBrand} />
+            </form>
+          </ListItem>
+          {['Marcas', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />

@@ -15,20 +15,37 @@ export default function Home({drawerWidth}) {
     const classes = useStyles();
 
     const [openSidebar, setOpenSidebar] = React.useState(false);
+    const [brand, setBrand] = React.useState("");
 
     const handleOpenSidebar = () => {
         setOpenSidebar(true);
     }
+
     const handleCloseSidebar = () => {
         setOpenSidebar(false);
     }
+
+    const handleChangeBrand = (e) => {
+        let brand = e.target.value;
+        setBrand(brand);
+    }
+
+    console.log(brand)
 
     return (
         <React.Fragment>
             <div className={classes.root}>
                 <CssBaseline />
-                <HeadSidebar openSidebar={openSidebar} drawerWidth={drawerWidth} handleOpenSidebar={handleOpenSidebar} handleCloseSidebar={handleCloseSidebar} />
-                <Catalogue openSidebar={openSidebar} drawerWidth={drawerWidth} brand={"nyx"} />
+                <HeadSidebar
+                    handleChangeBrand={handleChangeBrand}
+                    openSidebar={openSidebar}
+                    drawerWidth={drawerWidth}
+                    handleOpenSidebar={handleOpenSidebar}
+                    handleCloseSidebar={handleCloseSidebar} />
+                <Catalogue
+                    openSidebar={openSidebar}
+                    drawerWidth={drawerWidth}
+                    brand={brand} />
             </div>
         </React.Fragment>
     );
