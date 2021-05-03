@@ -15,7 +15,6 @@ import InfoIcon from '@material-ui/icons/Info';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import ProductDetail from './ProductDetail';
-
 import RatingProduct from './RatingProduct';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Products({id, image_link, product_type, name, description, price, rating}) {
+export default function Product({id, image_link, product_type, name, description, price, rating}) {
 
   const classes = useStyles();
   const [openId, setOpenId] = React.useState(false);

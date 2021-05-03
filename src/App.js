@@ -1,12 +1,16 @@
 import React from 'react';
-import Catalogue from './components/Catalogue';
-import './styles/App.css';
+import Home from './containers/Home';
+
 
 export default function App() {
-
+  
+  const drawerWidth = 240;
+  
   return (
     <React.Fragment>
-      <Catalogue brand={"nyx"} />
+      <Home drawerWidth={drawerWidth}/>
+      {/* <Whishlist /> */}
     </React.Fragment>
   );
+
 }
